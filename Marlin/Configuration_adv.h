@@ -1389,11 +1389,11 @@
  */
 #if HAS_MARLINUI_U8GLIB
   // Show SD percentage next to the progress bar
-  //#define DOGM_SD_PERCENT
+  #define DOGM_SD_PERCENT
 
   // Save many cycles by drawing a hollow frame or no frame on the Info Screen
-  //#define XYZ_NO_FRAME
-  #define XYZ_HOLLOW_FRAME
+  #define XYZ_NO_FRAME
+  //#define XYZ_HOLLOW_FRAME
 
   // Enable to save many cycles by drawing a hollow frame on Menu Screens
   #define MENU_HOLLOW_FRAME
@@ -1692,12 +1692,12 @@
  * Override if the automatically selected points are inadequate.
  */
 #if EITHER(AUTO_BED_LEVELING_3POINT, AUTO_BED_LEVELING_UBL)
-  //#define PROBE_PT_1_X 15
-  //#define PROBE_PT_1_Y 180
-  //#define PROBE_PT_2_X 15
-  //#define PROBE_PT_2_Y 20
-  //#define PROBE_PT_3_X 170
-  //#define PROBE_PT_3_Y 20
+  #define PROBE_PT_1_X 20
+  #define PROBE_PT_1_Y 200
+  #define PROBE_PT_2_X 110
+  #define PROBE_PT_2_Y 20
+  #define PROBE_PT_3_X 180
+  #define PROBE_PT_3_Y 200
 #endif
 
 /**
