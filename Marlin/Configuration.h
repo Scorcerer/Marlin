@@ -123,8 +123,8 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_2 -1
-//#define BAUDRATE_2 250000   // Enable to override BAUDRATE
+#define SERIAL_PORT_2 0
+#define BAUDRATE_2 250000   // Enable to override BAUDRATE
 
 /**
  * Select a third serial port on the board to use for communication with the host.
@@ -604,9 +604,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define  DEFAULT_Kp 12.10
-    #define  DEFAULT_Ki 0.63
-    #define  DEFAULT_Kd 58.10
+    #define DEFAULT_Kp 25.82
+    #define DEFAULT_Ki 1.44
+    #define DEFAULT_Kd 115.39
   #endif
 
 #endif // PIDTEMP
@@ -1187,7 +1187,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 37, -19, 0} // Z~=-1.58
+#define NOZZLE_TO_PROBE_OFFSET { 37, -19, -2} // Z~=-1.58
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -2150,7 +2150,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-//#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -2158,7 +2158,7 @@
 //  If CLOCKWISE normally moves DOWN this makes it go UP.
 //  If CLOCKWISE normally moves UP this makes it go DOWN.
 //
-//#define REVERSE_MENU_DIRECTION
+#define REVERSE_MENU_DIRECTION
 
 //
 // This option reverses the encoder direction for Select Screen.
@@ -2166,15 +2166,15 @@
 //  If CLOCKWISE normally moves LEFT this makes it go RIGHT.
 //  If CLOCKWISE normally moves RIGHT this makes it go LEFT.
 //
-//#define REVERSE_SELECT_DIRECTION
+// #define REVERSE_SELECT_DIRECTION
 
 //
 // Individual Axis Homing
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-#define INDIVIDUAL_AXIS_HOMING_MENU
-//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
+// #define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER
@@ -2503,10 +2503,34 @@
 //
 //#define U8GLIB_SSD1306
 
+// MidOLED 2.42" OLED Display
+// enable SDsupport if reader installed
+// undefine REVERSE_ENCODER_DIRECTION if using the horizontal encoder
+//
+#define MidOLED
+#if ENABLED(MidOLED)
+  #define MidOLED_242               // MidOLED 2.42" OLED Display
+  //#define MidOLED_13              // MidOLED 1.3" OLED displa  
+  //#define MidOLED_98              // MidOLED .98" or 1.5" OLED display
+  #if ENABLED(MidOLED_242)
+    #if ENABLED(SDSupport)
+      #define SD_DETECT_PIN -1      // enable if using the SD card
+    #endif
+    #define LCD_SCREEN_ROT_180
+  #endif
+  #if ENABLED(MidOLED_13)
+    #define U8GLIB_SH1106
+  #else
+    #define U8GLIB_SSD1306
+  #endif
+  #define IS_RRD_SC
+  // #define KILL_PIN 49
+#endif
+
 //
 // SAV OLEd LCD module support using either SSD1306 or SH1106 based LCD modules
 //
-#define SAV_3DGLCD
+// #define SAV_3DGLCD
 #if ENABLED(SAV_3DGLCD)
   // #define U8GLIB_SSD1306
   #define U8GLIB_SH1106
@@ -2536,7 +2560,7 @@
 //
 // Einstart S OLED SSD1306
 //
-//#define U8GLIB_SH1106_EINSTART
+// #define U8GLIB_SH1106_EINSTART
 
 //
 // Overlord OLED display/controller with i2c buzzer and LEDs
